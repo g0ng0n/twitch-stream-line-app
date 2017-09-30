@@ -11,21 +11,25 @@ import Loader from '../presentationals/Loader';
 //Provider/Container React Component
 class Streams extends React.Component {
     componentWillMount(){
-        this.props.store.subscribe(this.forceUpdate.bind(this));
+       this.props.store.subscribe(this.forceUpdate.bind(this));
        this.apiRequest();
-        setTimeout( () => {
-            this.dispatchFetchRequest();
-        }, 5000)
+       this.dispatchFetchRequest();
     }
 
     apiRequest() {
         axios.get('https://api.twitch.tv/kraken/streams/featured?&client_id=xxxx')
             .then(response => {
-                console.log(response);
+                this.dispatchFetchSuccess(response.data.featured.map(function(feat) {
+                    return feat.stream;
+                }));
             })
             .catch(e => {
                 console.log(e);
             });
+    }
+
+    dispatchFetchSuccess (streams) {
+        this.props.store.dispatch(FetchSuccess(streams));
     }
 
     dispatchFetchRequest () {
