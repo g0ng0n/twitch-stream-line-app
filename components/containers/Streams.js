@@ -6,7 +6,7 @@ import FetchRequest from '../../actions/FetchRequest';
 import FetchSuccess from '../../actions/FetchSuccess';
 import FetchFailure from '../../actions/FetchFailure';
 import Loader from '../presentationals/Loader';
-
+import StreamCard from '../presentationals/StreamCard';
 
 //Provider/Container React Component
 class Streams extends React.Component {
@@ -35,16 +35,26 @@ class Streams extends React.Component {
     dispatchFetchRequest () {
         this.props.store.dispatch(FetechRequest());
     }
-
+    const streamCardItems = stateProps.streams.map((stream) =>
+        <StreamCard
+            key = { stream._id }
+            streamCover = { stream.preview.medium }
+            streamLink = { stream.channel.url }
+        />
+    );
     render() {
-        const stateProps = this.props.store.getState();
-
         return (
             <div>
                 {status === "loading" ? (
                     <Loader />
                 ) : (
-                    <div></div>
+                    status === "success" ? (
+                        <div  className="stream-cards">
+                            {this.streamCardItems}
+                        </div>
+                    ) : (
+                        <div> </div>
+                    )
                 )
             }
             </div>

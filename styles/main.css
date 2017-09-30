@@ -15,12 +15,12 @@ body{
 .app {
     display: flex;
     flex-direction: "row";
-    flex-wrap: wrap;
     -webkit-align-items: center;
     align-items: center;
     -webkit-justify-content: center;
     justify-content: center;
     height: 100vh;
+    width: 100%;
 }
 
 .box{
@@ -113,4 +113,20 @@ body{
     100%{
         top: -10%;
     }
+}
+
+.stream-cards {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: "row";
+    flex-wrap: wrap;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.stream-cover {
+    position: relative;
+    margin: 20px;
 }
