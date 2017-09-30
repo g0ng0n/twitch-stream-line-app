@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
-
+import thunk from 'redux-thunk';
 import TwitchApp from './reducers/TwitchApp'
 import Streams from './components/containers/Streams';
 
@@ -21,7 +21,7 @@ class App extends React.Component {
 
 //initialize Store
 let store = createStore(TwitchApp,
-    applyMiddleware(logger)
+    applyMiddleware(thunk, logger)
 );
 
 ReactDOM.render(
