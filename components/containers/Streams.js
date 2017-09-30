@@ -40,6 +40,7 @@ class Streams extends React.Component {
     dispatchFetchRequest () {
         this.props.store.dispatch(FetechRequest());
     }
+
     const streamCardItems = stateProps.streams.map((stream) =>
         <StreamCard
             key = { stream._id }
