@@ -7,6 +7,7 @@ import FetchSuccess from '../../actions/FetchSuccess';
 import FetchFailure from '../../actions/FetchFailure';
 import Loader from '../presentationals/Loader';
 import StreamCard from '../presentationals/StreamCard';
+import Alert from '../presentationals/Alert';
 
 //Provider/Container React Component
 class Streams extends React.Component {
@@ -24,8 +25,12 @@ class Streams extends React.Component {
                 }));
             })
             .catch(e => {
-                console.log(e);
+                this.dispatchFetchFailure(e)
             });
+    }
+
+    dispatchFetchFailure (error) {
+        this.props.store.dispatch(FetchFailure(error));
     }
 
     dispatchFetchSuccess (streams) {
@@ -53,10 +58,16 @@ class Streams extends React.Component {
                             {this.streamCardItems}
                         </div>
                     ) : (
-                        <div> </div>
+                        status === "error" ? (
+                            <div>
+                                <Alert error = { error } />
+                            </div>
+                            ) : (
+                            <div> </div>
+                            )
+                        )
                     )
-                )
-            }
+                }
             </div>
         )
     }
